@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Welcome to Guitar Center</title>
+    <link rel="stylesheet" type="text/css" href="guitar.css">
+
+
+</head>
+<body>
+<p><marquee><h1>Welcome to Guitar Center</h1></marquee></p>
+<header class="container">
+<ul>
+    <li><a href="#">GUITARS</a></li>
+    <li><a href="#">BASS</a></li>
+    <li><a href="#">DRUMS</a></li>
+    <li><a href="#">KEYBOARD</a></li>
+    <li><a href="#">DJ & LIGHTING</a></li>
+    <li><a href="#">USED GEAR</a></li>
+    <li><a href="#">CLEARANCE</a></li>
+</ul>
+</header>
+<div class="buy_style container">
+    <img src="main.jpg" id="101" width="900px" height="600px">
+</div><br>
+
+<div id="btn_container" class="container"  >
+    <button type="button" onclick="prev()" >PREVIOUS</button>
+    <button id="btn_next"  type="button" onclick="next()">NEXT</button>
+</div><br>
+
+<div class="container">
+    <button id="product" type="button" onclick="toggle_btn()">PRODUCT DETAILS</button><br>
+    <div id="product_div"></div>
+
+
+<div class="container">
+<button id="ship" type="button" onclick="toggle_shipping()">SHIPPING INFO</button><br>
+    <div id="shipping_div"></div>
+</div>
+    <div class="container">
+    <button id="cust" type="button" onclick="toggle_cust()">CUSTOMER REVIEWS</button>
+    <div id="cust_div"></div>
+    </div>
+</div>
+<div class="container">
+    <form id="formbuy" action="buy_product.html">
+    <button type="submit" >BUY</button>
+    </form>
+</div>
+
+
+<!--<audio controls autoplay>
+    <source src="Titanic%20Instrumental(Piano).mp3" type="audio/mpeg">
+</audio>-->
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+            myobject = JSON.parse(this.responseText);
+            console.log(myobject);
+            localStorage.current_json = JSON.stringify(myobject);
+        }
+    };
+    xhttp.open("GET", "guitardata.json", true);
+    xhttp.send();
+    i = 0;
+    a = document.getElementById("101");
+    b = document.getElementById("product_div");
+    c = document.getElementById("shipping_div");
+    d = document.getElementById("cust_div");
+   /* function guitar_datta() {
+
+        a.src = myobject.allProducts[i].image_path;
+        b.innerHTML = myobject.allProducts[i].product_description;
+        c.innerHTML = myobject.allProducts[i].shipping_details;
+        d.innerHTML = myobject.allProducts[i].customer_reviews;
+    }*/
+
+    function next() {
+        if (i < myobject.allProducts[i].image_path.length){
+            a.src = myobject.allProducts[i].image_path;
+            b.innerHTML = myobject.allProducts[i].product_description;
+            c.innerHTML = myobject.allProducts[i].shipping_details;
+            d.innerHTML = myobject.allProducts[i].customer_reviews;
+            i++;
+        }
+        else{
+            alert("This is the last image");
+        }
+        localStorage.setItem("current_index", i);
+    }
+
+    function prev() {
+        if (i >= 1){
+            i--;
+            a.src = myobject.allProducts[i].image_path;
+            b.innerHTML = myobject.allProducts[i].product_description;
+            c.innerHTML = myobject.allProducts[i].shipping_details;
+            d.innerHTML = myobject.allProducts[i].customer_reviews;
+
+        }
+        else {
+            alert("This is the last image");
+        }
+        localStorage.setItem("current_index", i);
+
+    }
+
+
+
+
+    function toggle_btn() {
+        var element = document.getElementById("product_div");
+        element.classList.toggle("toggle_style");
+
+    }
+    function toggle_shipping() {
+        var element = document.getElementById("shipping_div");
+        element.classList.toggle("toggle_style");
+
+    }
+    function toggle_cust() {
+        var element = document.getElementById("cust_div");
+        element.classList.toggle("toggle_style");
+
+    }
+</script>
+
+</body>
+</html>

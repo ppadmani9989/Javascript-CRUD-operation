@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Welcome to Guitar Center</title>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="guitar.css">
+</head>
+<body onload="details()">
+
+<p><marquee><h1>Welcome to Guitar Center</h1></marquee></p>
+<header class="container">
+    <ul>
+        <li><a href="#">GUITARS</a></li>
+        <li><a href="#">BASS</a></li>
+        <li><a href="#">DRUMS</a></li>
+        <li><a href="#">KEYBOARD</a></li>
+        <li><a href="#">DJ & LIGHTING</a></li>
+        <li><a href="#">USED GEAR</a></li>
+        <li><a href="#">CLEARANCE</a></li>
+    </ul>
+</header>
+<div class="container">
+    <center><h2>Confirmation</h2></center>
+</div>
+<br><br>
+
+<div class="container">
+    <div class="content">
+        <p><img src="" id="final_image" width="400px" height="400px"></p>
+    </div>
+    <div class="contentright">
+        <br>
+        <br>
+        <p id="product"></p>
+        <br>
+        <br>
+        <p id="price"></p>
+        <p id="fn"></p>
+        <p id="ln"></p>
+        <p id="cc"></p>
+        <p id="em"></p>
+    </div>
+
+</div>
+
+<div class="buy_style container">
+    <form id="form_last" action="guitar.html">
+        <button type="submit" >HOME</button>
+    </form>
+</div>
+
+<script>
+
+    var getdata = localStorage.current_json;
+    var info = JSON.parse(getdata);
+    var cust = localStorage.getItem("firstname");
+    var cust1 = localStorage.getItem("lastname");
+    var cust2 = localStorage.getItem("creditcard");
+    var cust3 = localStorage.getItem("email");
+    var index = parseInt(localStorage.getItem("current_index"));
+
+    function details() {
+
+        document.getElementById("final_image").src = info.allProducts[index].image_path;
+        document.getElementById("product").innerHTML = info.allProducts[index].product_description;
+        document.getElementById("price").innerHTML = info.allProducts[index].price;
+
+        document.getElementById("fn").innerHTML = cust;
+
+        document.getElementById("ln").innerHTML = cust1;
+        document.getElementById("cc").innerHTML = cust2;
+        document.getElementById("em").innerHTML = cust3;
+    }
+
+
+
+
+</script>
+</body>
+</html>

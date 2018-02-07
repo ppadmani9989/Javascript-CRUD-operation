@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Welcome to Guitar Center</title>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="guitar.css">
+</head>
+<body onload="load_data()">
+
+<p><marquee><h1>Welcome to Guitar Center</h1></marquee></p>
+<header class="container">
+    <ul>
+        <li><a href="#">GUITARS</a></li>
+        <li><a href="#">BASS</a></li>
+        <li><a href="#">DRUMS</a></li>
+        <li><a href="#">KEYBOARD</a></li>
+        <li><a href="#">DJ & LIGHTING</a></li>
+        <li><a href="#">USED GEAR</a></li>
+        <li><a href="#">CLEARANCE</a></li>
+    </ul>
+</header>
+
+<div class="container">
+    <img id="left" class="leftside" width="400px" height="400px">
+    <div id="right" class="rightside">
+        <pre id="product_description"></pre>
+        <br><br>
+        <pre id="shipping_details"></pre>
+        <br><br>
+        <pre id="price"></pre>
+    </div>
+
+</div>
+<div class="container">
+    <h1>Purchase Form</h1>
+</div>
+<div class="container">
+<div class="content">
+<div class="container">
+<label for="firstname">First Name</label>
+    <div>
+<input type="text" id="firstname" required>
+</div>
+</div>
+    <div class="container">
+<label for="lastname">Last Name</label>
+<div>
+<input type="text" id="lastname" required>
+</div>
+    </div>
+    <div class="container">
+<label for="creditcard">Credit Card</label>
+<div>
+<input type="number" id="creditcard" required>
+</div>
+    </div>
+    <div class="container">
+<label for="email">Email</label>
+<div>
+    <input type="email" id="email" required>
+</div>
+        </div>
+    <br>
+<div class="container">
+<button type="submit" onclick="review()">REVIEW</button>
+</div>
+</div>
+    <div class="contentright" id="edit" contenteditable="true">
+    <p id="one"></p>
+    <p id="two"></p>
+    <p id="three"></p>
+    <p id="four"></p>
+    <br>
+    <button type="submit" onclick="edit()">EDIT</button>
+    </div>
+</div>
+<br>
+<div class="buy_style container">
+
+    <button id="b01" onclick="buy()">BUY</button>
+
+</div>
+
+<script>
+
+    var getdata = localStorage.current_json;
+    var info = JSON.parse(getdata);
+    var index = parseInt(localStorage.getItem("current_index"));
+
+    function load_data() {
+
+        document.getElementById("left").src = info.allProducts[index].image_path;
+        document.getElementById("product_description").innerHTML = info.allProducts[index].product_description;
+        document.getElementById("shipping_details").innerHTML = info.allProducts[index].shipping_details;
+        document.getElementById("price").innerHTML = info.allProducts[index].price;
+    }
+
+   // var firstname = document.getElementById("firstname").value;
+    //var lastname = document.getElementById("lastname").value;
+    //var creditcard = document.getElementById("creditcard").value;
+    //var email = document.getElementById("email").value;
+
+   /* var fn = document.getElementById("firstname");
+    fn.innerHTML = "";
+    var ln = document.getElementById("lastname");
+    ln.innerHTML = "";
+    var cc = document.getElementById("creditcard");
+    cc.innerHTML = "";
+    var em = document.getElementById("email");
+    em.innerHTML = "";*/
+
+    function review() {
+
+        var firstname = document.getElementById("firstname").value;
+        var lastname = document.getElementById("lastname").value;
+        var creditcard = document.getElementById("creditcard").value;
+        var email = document.getElementById("email").value;
+
+        document.getElementById("one").innerHTML = firstname;
+        document.getElementById("two").innerHTML = lastname;
+        document.getElementById("three").innerHTML = creditcard;
+        document.getElementById("four").innerHTML = email;
+
+        document.getElementById("firstname").value = "";
+        document.getElementById("lastname").value = "";
+        document.getElementById("creditcard").value = "";
+        document.getElementById("email").value = "";
+
+        localStorage.setItem("firstname", firstname);
+        localStorage.setItem("lastname", lastname);
+        localStorage.setItem("creditcard", creditcard);
+        localStorage.setItem("email", email);
+
+
+
+        /*if (firstname == "" && lastname == ""){
+
+            document.getElementById("firstname").style.backgroundColor = "red";
+            document.getElementById("lastname").style.backgroundColor = "red";
+
+        }
+
+
+        if (email == ""){
+            alert("Must filled");
+        }*/
+
+    }
+
+    function edit() {
+
+        var a = document.getElementById("one").innerHTML;
+        var b = document.getElementById("two").innerHTML;
+        var c = document.getElementById("three").innerHTML;
+        var d = document.getElementById("four").innerHTML;
+
+        document.getElementById("firstname").value = a;
+        document.getElementById("lastname").value = b;
+        document.getElementById("creditcard").value = c;
+        document.getElementById("email").value = d;
+
+    }
+
+    function buy() {
+
+  //      details = {
+    //        firstname : firstname.value,
+      //      lastname : lastname.value,
+        //    creditcard : creditcard.value,
+          //  email : email.value,
+      // }
+
+        //alert(document.getElementById("firstname").value);
+        //localStorage.setItem("firstname", details);
+        //alert(localStorage.getItem("firstname"));
+        window.location = 'http://localhost:63342/Giutar_Center/guitar_last.html?_ijt=a5cn8c33h94rbiluroasahstrc';
+
+    }
+
+
+</script>
+
+</body>
+</html>
